@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1429954049 source:e:\codeblocks\workspace\pro1.2.3\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<cmath>
+	<stdlib.h>
+
+1429944706 source:e:\codeblocks\workspace\pro1.2.3\test.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<cmath>
+	<stdlib.h>
+
