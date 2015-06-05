@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1433517333 source:e:\codeblocks\workspace\pro1.4.2\main.cpp
+	<iostream>
+	<fstream>
+	<algorithm>
+	<memory.h>
+
