@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1433945041 source:e:\codeblocks\workspace\pro1.5.2 correct\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<cmath>
+
