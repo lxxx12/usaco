@@ -8,7 +8,7 @@ LANG: C++
 #include <string>
 #include<cmath>
 
-using namespace std;
+using namespace std;//回文的运算使用折叠法 偶数折叠与奇数折叠    偶数 1-9 1-9 奇数 1-9 1-9 1-9
 int a,b;
 int ppr[1000000];
 int p=0;
