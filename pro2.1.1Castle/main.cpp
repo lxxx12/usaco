@@ -50,22 +50,7 @@ int flood_fill(int row,int pos,int new_c)
             }
         }
         return new_c;
-//        if(pos<L-1)
-//        {
-//            pos++;
-//            if(component[row][pos]==-2)
-//                flood_fill(row,pos,new_c);
-//            else
-//                flood_fill(row,pos+1,new_c);
-//        }
-//        else
-//        {
-//            row++;
-//            pos=0;
-//            if(component[row][pos]==-2)
-//                flood_fill(row,pos,new_c);
-//            else
-//                flood_fill(row,pos+1,new_c);
+
     }
 }
 
@@ -77,8 +62,8 @@ int main()
 {
     ifstream fin("castle.in");
 	ofstream fout("castle.out");
-	int i,j,k,n1;
-	int rome_m1=0,rome_m2=0,place_1=0,place_2=0;
+	int i,j,k,n1,tmp;
+	int room_m1=0,room_m2=0,place_1=0,place_2=0;
 	char diction;
 	fin>>L>>R;//row 行   line 列 1:1:西 ，2:2：北，3:4：东 4:8:南
 	for(i=0;i<51;i++)
@@ -140,82 +125,43 @@ int main()
         }
     }
     for(i=0;i<new_c;i++)
-        rome_m1=max(sum[i],rome_m1);
-
-
-    for(i=1;i<=R;i++)
-    {
-        for(j=1;j<=L;j++)
-        {
-
-            if(component[i][j+1]!=component[i][j])
+        room_m1=max(sum[i],room_m1);
+    for( j = L; j >= 1 ; --j )
+            for( i = 1; i <=R; ++i )
             {
-                if(rome_m2<=(sum[component[i][j]]+sum[component[i][j+1]]))
+                if( j != L && mark[i][j][2]==1 ) // 东侧有墙
                 {
-                     if(rome_m2==(sum[component[i][j]]+sum[component[i][j+1]]))
+
+                    if( component[i][j] != component[i][j+1] )
                     {
-                        if(j<place_2)
+                        tmp = sum[component[i][j]]+sum[component[i][j+1]];
+                        if( tmp >= room_m2 )
                         {
-                            place_1=i;
-                            place_2=j;
-                            rome_m2=sum[component[i][j]]+sum[component[i][j+1]];
-                            diction='E';
-                        }
-                        if(j==place_2&&i>place_1)
-                        {
-                            place_1=i;
-                            place_2=j;
-                            rome_m2=sum[component[i][j]]+sum[component[i][j+1]];
+                            room_m2 = tmp ;
+                            place_1 = i; place_2 = j;
                             diction='E';
                         }
                     }
-                    else
-                    place_1=i;
-                    place_2=j;
-                    rome_m2=sum[component[i][j]]+sum[component[i][j+1]];
-                    diction='E';
                 }
-            }
-              if(component[i+1][j]!=component[i][j])
-            {
-                 if(rome_m2<=(sum[component[i][j]]+sum[component[i+1][j]]))
+                if( i!=1 &&  mark[i][j][1]==1 ) // 北侧有墙
                 {
-                    if(rome_m2==(sum[component[i][j]]+sum[component[i+1][j]]))
+
+                    if( component[i][j] != component[i-1][j] )
                     {
-                        if(j<place_2)
+                        tmp = sum[component[i][j]] + sum[component[i-1][j]] ;
+                        if( tmp >= room_m2 )
                         {
-                            place_1=i+1;
-                            place_2=j;
-                            rome_m2=sum[component[i][j]]+sum[component[i+1][j]];
-                            diction='N';
+                            room_m2 = tmp ;
+                            place_1 = i; place_2 = j;
+                            diction='N' ;
                         }
-                        if(j==place_2&&i>place_1)
-                        {
-                            place_1=i+1;
-                            place_2=j;
-                            rome_m2=sum[component[i][j]]+sum[component[i+1][j]];
-                            diction='N';
-                        }
-                    }
-                    else
-                    {
-                        place_1=i+1;
-                        place_2=j;
-                        rome_m2=sum[component[i][j]]+sum[component[i+1][j]];
-                        diction='N';
                     }
                 }
             }
-
-        }
-    }
-
-
-
 
     fout<<new_c<<endl;
-    fout<<rome_m1<<endl;
-    fout<<rome_m2<<endl;
+    fout<<room_m1<<endl;
+    fout<<room_m2<<endl;
     fout<<place_1<<" "<<place_2<<" "<<diction<<endl;
     return 0;
 }
